@@ -1,0 +1,26 @@
+{
+  "name": "devtinder",
+  "version": "1.0.0",
+  "description": "developers",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/himanshuCoder2/devTinder.git"
+  },
+  "keywords": [
+    "nodejs",
+    "javascript"
+  ],
+  "author": "Himanshu Bijwar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/himanshuCoder2/devTinder/issues"
+  },
+  "homepage": "https://github.com/himanshuCoder2/devTinder#readme",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
