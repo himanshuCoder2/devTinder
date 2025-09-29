@@ -2,13 +2,21 @@ const express = require('express');
 
 const app =express();
 
-//Post API
-app.post("/user",(req,res)=>{
+//dynamic routing
+app.get("/user/:userId/:name/:password",(req,res) =>{
+    console.log(req.params)
     res.send({firstname:"Himu",lastname:"B"})
 })
 
 
-//GET API
+/*** 
+ * 
+ * //Post API
+app.post("/user",(req,res)=>{
+    res.send({firstname:"Himu",lastname:"B"})
+})
+
+ * //GET API
 app.get("/user",(req,res)=>{
     res.send("Data retrieved succesfully")
 })
@@ -25,6 +33,8 @@ app.patch("/user",(req,res)=>{
 app.delete("/user",(req,res)=>{
     res.send("User Deleted Successfully")
 })
+*/
+
 
 app.use("/hello",(req,res)=>{
 res.send("hello from the server!");
