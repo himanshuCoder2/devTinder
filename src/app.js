@@ -3,46 +3,29 @@ const express = require('express');
 const app =express();
 
 //dynamic routing
-app.get("/user/:userId/:name/:password",(req,res) =>{
-    console.log(req.params)
-    res.send({firstname:"Himu",lastname:"B"})
-})
-
-
-/*** 
- * 
- * //Post API
-app.post("/user",(req,res)=>{
-    res.send({firstname:"Himu",lastname:"B"})
-})
-
- * //GET API
-app.get("/user",(req,res)=>{
-    res.send("Data retrieved succesfully")
-})
-
-//Update
-app.put("/user",(req,res)=>{
-    res.send({message:"User update successfully",firstname:"H",lastname:"B"})
-})
-
-app.patch("/user",(req,res)=>{
-    res.send({message:"User update successfully",status:{active:true}})
-})
-
-app.delete("/user",(req,res)=>{
-    res.send("User Deleted Successfully")
-})
-*/
-
-
-app.use("/hello",(req,res)=>{
-res.send("hello from the server!");
-});
-
-app.use("/test",(req,res)=>{
-res.send("Server is start!");
-});
+app.use("/user",(req,res,next)=>{
+    //route handler
+    console.log("Route user ");
+    // res.send("Response!!");
+    next();
+},
+(req,res,next)=>{
+    console.log("Route user 2");
+    // res.send("2nd Response!!");
+    next();
+}
+,
+(req,res,next)=>{
+    console.log("Route user 3");
+    // res.send("3rd Response!!");
+    next();
+},
+(req,res,next)=>{
+    console.log("Route user 4");
+    res.send("4th Response!!");
+    // next();
+}
+);
 
 app.listen(3000,()=>{
     console.log(
