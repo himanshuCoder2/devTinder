@@ -1,28 +1,40 @@
 const express = require("express");
-
+const connectDB = require("./config/db")
 const app = express();
+const User = require("./models/user")
 
-app.use("/", (err, req, res, next) => {
-  if (err) {
-    // Log your error
-    res.status(500).send("something went wrong");
+app.post('/signup', async (req, res) => {
+
+  const user = new User({
+    firstName: "Kishan ",
+    lastName: "Kumar",
+    email: "Ravi@gamil.com",
+    passsword: "John@342241#",
+    age: 20,
+    gender: "Male",
+    about: "User",
+    photoUrl: "localhot://5000/dev",
+    skills: "Learning"
+  }); try {
+    await user.save();
+    res.status(201).send("User Added Successfully");
+  } catch (error) {
+    res.status(400).send("Error occur during user signup", error.message
+    );
   }
-});
 
-app.get("/getUserData", (req, res) => {
-  //try {
-  // Logic of DB call and get user data
-  throw new Error("dvbzhjf");
-  res.send("User Data Sent");
+
+});
+connectDB().then(() => {
+  console.log("Database connection established");
+  app.listen(5000, () => {
+    console.log("Server is successfully running on Port 5000..");
   });
+})
+  .catch((err) => {
+    console.error("Database cannnot be connected");
 
-app.use("/", (err, req, res, next) => {
-  if (err) {
-    // error
-    res.status(500).send("something went wrong");
   }
-});
+  );
 
-app.listen(3000, () => {
-  console.log("Server is successfully running on Port 3000..");
-});
+
