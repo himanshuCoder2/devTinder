@@ -40,17 +40,17 @@ app.get("/user", async (req, res) => {
   }
 });
 //getUserbyId
-app.get("/getUser",async(req,res)=>{
-  const id=req.body.userId
-  try{
-    
-    const user=await User.findById(id);
-    if(!id){
+app.get("/getUser", async (req, res) => {
+  const id = req.body.userId
+  try {
+
+    const user = await User.findById(id);
+    if (!id) {
       res.status(404).send("User not found")
-    }else{
+    } else {
       res.send(user);
     }
-  }catch(err){
+  } catch (err) {
     res.status(400).send("Something Went Wrong");
   }
 })
@@ -66,6 +66,32 @@ app.get('/feed', async (req, res) => {
     res.status(400).send("Something went wrong ");
   }
 })
+
+// Detele a user from the database
+app.delete("/user", async (req, res) => {
+  const id = req.body.userId;
+  try {
+    const user = await User.findByIdAndDelete(id);
+    res.send("User Deleted Successfully");
+  } catch (err) {
+    res.status(400).send("Something went wrong");
+  }
+})
+
+// Update data of the user
+app.patch("/user", async (req, res) => {
+  const userId = req.body.userId;
+  const data = req.body;
+  try {
+    const user = await User.findByIdAndUpdate({ _id: userId }, data, {
+      returnDocument: "after",
+    });
+    console.log(user);
+    res.send("User updated successfully");
+  } catch (err) {
+    res.status(400).send("Something went wrong ");
+  }
+});
 
 connectDB().then(() => {
   console.log("Database connection established");
