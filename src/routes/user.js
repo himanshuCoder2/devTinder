@@ -4,7 +4,7 @@ const userRouter = express.Router();
 const { userAuth } = require("../middlewares/auth");
 const ConnectionRequest = require("../models/connectionRequest");
 const User = require("../models/user");
-const USER_SAFE_DATA = "firstName lastName photoUrl age gender about skills";
+const USER_SAFE_DATA = "firstName lastName photoUrl age gender about skills _id";
 
 userRouter.get("/user/requests/received", userAuth, async (req, res) => {
     try {
@@ -40,7 +40,6 @@ userRouter.get("/user/connections", userAuth, async (req, res) => {
             .populate("fromUserId", USER_SAFE_DATA)
             .populate("toUserId", USER_SAFE_DATA);
 
-        console.log(connectionRequests);
 
         const data = connectionRequests.map((row) => {
             if (row.fromUserId._id.toString() === loggedInUser._id.toString()) {
